@@ -4,28 +4,10 @@ import java.util.*
 
 
 @Entity
-data class User @JvmOverloads constructor(
-    @Id
-    var id: Long = 0,
+data class User(
+    @Id var id: Long = 0,
     var name: String? = null
 )
-
-@Entity
-data class Note @JvmOverloads constructor(
-    @Id
-    var id: Long = 0,
-    var text: String? = null,
-    var comment: String? = null,
-    var date: Date? = null,
-)
-
-@Entity
-data class Person @JvmOverloads constructor(@Id var id:Long = 0,
-                                            var name:String? = null,
-                                            var age:Int = 0,
-                                            var high:Int = 0)
-
-
 
 /**
  * When using a data class, add default values for all parameters. This will ensure your data class will have a

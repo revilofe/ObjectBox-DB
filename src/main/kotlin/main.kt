@@ -1,8 +1,13 @@
 import io.objectbox.Box
 import io.objectbox.BoxStore
 
+
 fun main(args: Array<String>) {
-    val store: BoxStore = MyObjectBox.builder().name("objectbox-notes-db").build()
+
+    //val store: BoxStore = ObjectBox.store
+    //var store = MyObjectBox.builder().name("nameDB").build()
+    System.out.println("Using ObjectBox " + BoxStore.getVersion() + " (" + BoxStore.getVersionNative() + ")");
+/*
     val box: Box<Note> = store.boxFor(Note::class.java)
     val text = if (args.size > 0) java.lang.String.join(" ", *args) else "No text given"
     box.put(Note(text=text))
@@ -11,15 +16,17 @@ fun main(args: Array<String>) {
         println(note)
     }
     store.close()
+    */
+
 }
 /*
 object ObjectBox {
     lateinit var store: BoxStore
         private set
 
-    fun init(context: Context) {
+    fun init(nameDB: String) {
         store = MyObjectBox.builder()
-            .androidContext(context.applicationContext)
+            .name(nameDB)
             .build()
     }
 }*/

@@ -9,13 +9,6 @@ plugins {
     application
 
 }
-/*
-kapt {
-    arguments {
-        arg("objectbox.modelPath", "$projectDir/schemas/objectbox.json")
-    }
-}
-*/
 
 group = "me.usuario"
 version = "1.0-SNAPSHOT"
@@ -43,6 +36,7 @@ dependencies {
 
 }
 
+
 tasks.test {
     useJUnitPlatform()
 }
@@ -59,7 +53,18 @@ tasks.withType<JavaCompile>() {
     options.compilerArgs.add("-Aobjectbox.debug=true")
 }
 
+//Optional: Change the Model File Path
+tasks.withType<JavaCompile>() {
+    options.compilerArgs.add("-Aobjectbox.modelPath=$projectDir/schemas/objectbox.json")
+}
+
+//Optional: Change the MyObjectBox package
+tasks.withType<JavaCompile>() {
+    options.compilerArgs.add("-Aobjectbox.myObjectBoxPackage=com.example.project")
+}
+
 
 // apply the plugin after the dependencies block so it does not automatically add objectbox-android
 // which would conflict with objectbox-android-objectbrowser on debug builds
-//apply(plugin = "io.objectbox")
+apply(plugin = "io.objectbox")
+
