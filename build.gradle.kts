@@ -1,9 +1,21 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     kotlin("jvm") version "1.6.10"
+    kotlin("kapt") version "1.6.10"
+    //kotlin("io.objectbox") version "3.1.2"
+    //id("io.objectbox")
     application
+
 }
+/*
+kapt {
+    arguments {
+        arg("objectbox.modelPath", "$projectDir/schemas/objectbox.json")
+    }
+}
+*/
 
 group = "me.usuario"
 version = "1.0-SNAPSHOT"
@@ -15,13 +27,20 @@ repositories {
 }
 
 dependencies {
-    //implementation("android.arch.persistence.room:runtime:1.1.1")
-    testImplementation(kotlin("test"))
-    implementation("io.objectbox:objectbox-java:$objectboxVersion")
     implementation("io.objectbox:objectbox-gradle-plugin:$objectboxVersion") //Gradle Plugin for ObjectBox (NoSQL for Objects)
+
+    // some useful Kotlin extension functions
+    implementation("io.objectbox:objectbox-kotlin:$objectboxVersion")
+    implementation("io.objectbox:objectbox-java:$objectboxVersion")
+
     implementation("io.objectbox:objectbox-linux:$objectboxVersion") //add Linux platform dependencies to your project’s
-    //annotationProcessor("io.objectbox:objectbox-processor:$objectboxVersion")
-    //annotationProcessor("android.arch.persistence.room:compiler:1.1.1") //dependencies to the ObjectBox Java API and annotation processor are added by default by the ObjectBox Gradle plugin
+    //implementation("io.objectbox:objectbox-android:$objectboxVersion")
+    annotationProcessor("io.objectbox:objectbox-processor:$objectboxVersion")
+    //object box
+    //implementation("io.objectbox:objectbox-android:$objectboxVersion")
+
+    testImplementation(kotlin("test"))
+
 }
 
 tasks.test {
